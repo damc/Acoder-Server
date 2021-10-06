@@ -1,25 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, logout_user, \
-    current_user
 from uuid import uuid4
+
+from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_user, logout_user, \
+    current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['SECRET_KEY'] = 'thisissecret'
-
-db = SQLAlchemy(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
-class User(UserMixin, db.Model):
-    """User model."""
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    api_key = db.Column(db.String(100), unique=True)
+from . import app
+from . import db
+from . import login_manager
+from .user import User
 
 
 @login_manager.user_loader
@@ -107,8 +96,3 @@ def dashboard():
         return render_template('dashboard.html', api_key=current_user.api_key)
     else:
         return redirect(url_for('login'))
-
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)

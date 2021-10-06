@@ -22,11 +22,13 @@ entrypoints==0.3
 et-xmlfile==1.1.0
 fasteners==0.14.1
 Flask==2.0.1
+Flask-Bcrypt==0.7.1
 Flask-HTTPAuth==4.4.0
 Flask-Login==0.5.0
 flask-marshmallow==0.14.0
 Flask-RESTful==0.3.9
 Flask-SQLAlchemy==2.5.1
+Flask-WTF==0.15.1
 future==0.18.2
 greenlet==1.1.1
 gunicorn==20.1.0
@@ -91,4 +93,5 @@ urllib3==1.25.8
 usb-creator==0.3.7
 wadllib==1.3.3
 Werkzeug==2.0.1
+WTForms==2.3.3
 xkit==0.0.0
