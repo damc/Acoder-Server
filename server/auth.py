@@ -1,8 +1,7 @@
-from uuid import uuid4
-
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, \
     current_user
+from secrets import token_urlsafe
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import app
@@ -29,9 +28,10 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        password_repeat = request.form['password_repeat']
         accept_terms = request.form['accept_terms']
 
-        if not email or not password or not accept_terms:
+        if not email or not password or not password_repeat or not accept_terms:
             flash('Please fill all the fields.')
             return redirect(url_for('register'))
 
@@ -39,12 +39,16 @@ def register():
             flash('Please accept terms and conditions.')
             return redirect(url_for('register'))
 
+        if password != password_repeat:
+            flash('Passwords do not match.')
+            return redirect(url_for('register'))
+
         existing_user = User.query.filter_by(email=email).first()
         if not existing_user:
             new_user = User(
                 email=email,
                 password=generate_password_hash(password, method='sha256'),
-                api_key=str(uuid4()))
+                api_key=str(token_urlsafe(16)))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
