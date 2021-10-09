@@ -2,3 +2,5 @@ archive
 .idea
 task.md
 *__pycache__*
+*egg-info*
+logs.log

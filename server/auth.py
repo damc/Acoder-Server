@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, logout_user, \
-    current_user
+from flask_login import login_user, logout_user, current_user
 from secrets import token_urlsafe
 from werkzeug.security import generate_password_hash, check_password_hash
 

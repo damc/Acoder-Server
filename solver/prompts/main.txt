@@ -1,0 +1,25 @@
+# {{ task.title }}
+
+## Code before change
+{% for place in (task.places_to_change + task.places_to_look) %}
+{% if place.code %}### {{ place.file_path }}
+
+```
+{{ replace_stop(place.code) }}
+```{% endif %}
+{% endfor %}
+## Change description
+
+{{ task.description }}
+
+## Code after change
+{% for place in changes %}
+### {{ place.file_path }}
+
+```
+{{ replace_stop(place.code) }}
+```
+{% endfor %}
+### {{ current_place.file_path }}
+
+```

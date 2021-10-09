@@ -1,0 +1,2 @@
+class AcoderError(Exception):
+    pass
