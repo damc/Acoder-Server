@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask.wrappers import Response
 
-from solver.model import json_to_task
+from solver.task import json_to_task
 
 from . import app
 from .user import User
@@ -26,4 +26,4 @@ def solve(user: User) -> Response:
     """Solve task"""
     json = request.json
     task = json_to_task(json)
-    return jsonify(solver_solve(task))
+    return jsonify(solver_solve(task, str(user.id)))

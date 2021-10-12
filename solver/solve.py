@@ -6,7 +6,7 @@ from .task import Task, Place
 from .safety import validate_description, sanitize_code
 
 
-def solve(task: Task) -> List[Place]:
+def solve(task: Task, user_id: Optional[str] = None) -> List[Place]:
     validate_description(task.description)
     changes = []
     for key, place in enumerate(task.places_to_change):
