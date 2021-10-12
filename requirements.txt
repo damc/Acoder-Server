@@ -6,3 +6,5 @@ mysqlclient
 Werkzeug~=2.0.1
 Jinja2~=3.0.1
 openai~=0.10.2
+pytest~=6.2.5
+setuptools~=45.2.0
