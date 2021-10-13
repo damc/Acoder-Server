@@ -4,6 +4,7 @@ from flask.wrappers import Response
 from solver.task import json_to_task
 
 from . import app
+from . import db
 from .user import User
 from solver import solve as solver_solve
 
@@ -20,8 +21,19 @@ def api_key_required(f):
     return decorator
 
 
+def limit_number_of_requests(f):
+    def decorator(user, *args, **kwargs):
+        if user.requests >= 250:
+            return jsonify({'error': 'too many requests'}), 401
+        user.requests += 1
+        db.session.commit()
+        return f(user, *args, **kwargs)
+    return decorator
+
+
 @app.route('/solve', methods=['POST'])
 @api_key_required
+@limit_number_of_requests
 def solve(user: User) -> Response:
     """Solve task"""
     json = request.json
