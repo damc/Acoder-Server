@@ -4,4 +4,5 @@ CREATE TABLE user (
     password VARCHAR(100) NOT NULL,
     api_key VARCHAR(100) NOT NULL,
     requests INTEGER NOT NULL DEFAULT 0
+    unsafe_requests INTEGER NOT NULL DEFAULT 0
 );

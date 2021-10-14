@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from flask import request, jsonify
 from flask.wrappers import Response
 
@@ -6,7 +8,7 @@ from solver.task import json_to_task
 from . import app
 from . import db
 from .user import User
-from solver import solve as solver_solve
+from solver import solve as solver_solve, UnsafeTaskError
 
 
 def api_key_required(f):
@@ -24,7 +26,7 @@ def api_key_required(f):
 def limit_number_of_requests(f):
     def decorator(user, *args, **kwargs):
         if user.requests >= 250:
-            return jsonify({'error': 'too many requests'}), 401
+            return jsonify({'error': 'too many requests'}), 429
         user.requests += 1
         db.session.commit()
         return f(user, *args, **kwargs)
@@ -34,8 +36,14 @@ def limit_number_of_requests(f):
 @app.route('/solve', methods=['POST'])
 @api_key_required
 @limit_number_of_requests
-def solve(user: User) -> Response:
+def solve(user: User) -> Tuple[Response, int]:
     """Solve task"""
     json = request.json
     task = json_to_task(json)
-    return jsonify(solver_solve(task, str(user.id)))
+    try:
+        changes = solver_solve(task, str(user.id))
+    except UnsafeTaskError:
+        user.unsafe_requests += 1
+        db.session.commit()
+        return jsonify({'error': 'task unsafe'}), 403
+    return jsonify(changes), 200

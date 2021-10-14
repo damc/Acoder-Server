@@ -9,3 +9,4 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     api_key = db.Column(db.String(100), unique=True)
     requests = db.Column(db.Integer, default=0)
+    unsafe_requests = db.Column(db.Integer, default=0)
