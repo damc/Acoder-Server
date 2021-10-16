@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td><input type="checkbox" id="accept_terms" name="accept_terms" value="on" required>
-            <label for="accept_terms">I accept terms and conditions and privacy policy</label></td>
+            <label for="accept_terms">I accept <a href="{{ url_for('static', filename='documents/terms-of-service.pdf') }}">terms of service</a> and <a href="{{ url_for('static', filename='documents/privacy-policy.pdf') }}">privacy policy</a>.</label></td>
         </tr>
         <tr>
             <td><input type="submit" value="Register"></td>

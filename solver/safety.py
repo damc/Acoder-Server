@@ -5,7 +5,6 @@ from json import load
 
 from .codex import codex, prompt
 from .errors import UnsafeTaskError
-from .messages import error_messages
 
 CODE_VALIDATION_DIR = 'solver/code_validation'
 CODE_THRESHOLD = 0.02
