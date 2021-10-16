@@ -4,18 +4,10 @@ from openai.error import InvalidRequestError
 from logging import debug
 
 
-from .error import AcoderError
+from .errors import InputTooLongError, OutputTooLongError, ContentFilterError
 
 
 PATH_TO_PROMPTS = "solver/prompts"
-
-
-class InputTooLongError(AcoderError):
-    pass
-
-
-class ContentFilterError(AcoderError):
-    pass
 
 
 def prompt(prompt_template: str, **kwargs):
@@ -36,12 +28,18 @@ def codex(prompt_: str, **kwargs) -> str:
     parameters = {**default, **kwargs}
     try:
         response = Completion.create(**parameters)['choices'][0]
-    except InvalidRequestError:
-        raise InputTooLongError("The input is too long")
+    except InvalidRequestError as error:
+        if str(error).startswith("to do: put message here"):
+            raise InputTooLongError("Input too long")
+        raise error
     debug(f"Prompt: {prompt_}")
     debug(f"Response: {response['text']}")
-    if response['finish_reason'] == 'length':
-        raise InputTooLongError("The input is too long")
-    if response['finish_reason'] == 'content_filter':
-        raise ContentFilterError("The content filter has been triggered")
+    validate_finish_reason(response)
     return response["text"]
+
+
+def validate_finish_reason(response):
+    if response['finish_reason'] == 'length':
+        raise OutputTooLongError("Output too long")
+    if response['finish_reason'] == 'content_filter':
+        raise ContentFilterError("Content filter triggered")

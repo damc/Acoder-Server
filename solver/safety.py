@@ -4,15 +4,11 @@ from re import findall
 from json import load
 
 from .codex import codex, prompt
-from .error import AcoderError
+from .errors import UnsafeTaskError
 from .messages import error_messages
 
 CODE_VALIDATION_DIR = 'solver/code_validation'
 CODE_THRESHOLD = 0.02
-
-
-class UnsafeTaskError(AcoderError):
-    pass
 
 
 def validate_description(description: str):
@@ -22,7 +18,7 @@ def validate_description(description: str):
     )
     output = codex(prompt_, stop="Explanation", max_tokens=12).strip().lower()
     if output != "safe":
-        raise UnsafeTaskError(error_messages['task_unsafe'])
+        raise UnsafeTaskError("Task unsafe")
 
 
 def sanitize_code(old: str, new: str) -> str:

@@ -1,11 +1,13 @@
 from logging import basicConfig, DEBUG
 from os import getenv
+from sys import stdout
 
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-basicConfig(filename='logs.log', level=DEBUG)
+
+basicConfig(stream=stdout, level=DEBUG)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
