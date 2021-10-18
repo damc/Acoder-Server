@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block body %}
     <p>
-        You can use the following API key to use the Acoder console application. Put this into an environment variable with name "ACODER_API_KEY".
+        You can use the following API key to use the Acoder console application.
     </p>
     <p>
         API key: {{ api_key }}
@@ -10,6 +10,6 @@
     <p>
         In order to accomplish that, you need to execute the following command in the terminal:
     </p>
-    <code>export ACODER_API_KEY={{ api_key }}</code>
+    <code>acoder configure {{ api_key }}</code>
     <p>After you do that, you will be able to use Acoder console application.</p>
 {% endblock %}
