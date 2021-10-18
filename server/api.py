@@ -16,10 +16,10 @@ def api_key_required(f):
     def decorator(*args, **kwargs):
         api_key = request.headers.get('X-API-KEY')
         if api_key is None:
-            return jsonify({'error': 'Api key is missing'}), 401
+            return jsonify({'error': 'API key missing'}), 401
         user = User.query.filter_by(api_key=api_key).first()
         if user is None:
-            return jsonify({'error': 'Invalid api key'}), 401
+            return jsonify({'error': 'Invalid API key'}), 401
         return f(user, *args, **kwargs)
     return decorator
 
