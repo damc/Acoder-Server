@@ -43,6 +43,7 @@ def remove_language_name(code: str) -> str:
     for language in languages():
         if code.startswith(language):
             return code[len(language):]
+    return code
 
 
 def languages() -> List[str]:
