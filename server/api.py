@@ -1,3 +1,4 @@
+from json import loads
 from logging import exception
 from typing import Tuple
 
@@ -5,8 +6,9 @@ from flask import request, jsonify
 from flask.wrappers import Response
 
 from solver import solve as solver_solve, UnsafeTaskError
-from solver.task import json_to_task
+from solver.task import dict_to_task
 from . import app
+from . import cache
 from . import db
 from .error_codes import error_codes
 from .user import User
@@ -39,8 +41,13 @@ def limit_number_of_requests(f):
 @limit_number_of_requests
 def solve(user: User) -> Tuple[Response, int]:
     """Solve task"""
-    json = request.json
-    task = json_to_task(json)
+    body = loads(request.json)
+    allow_cached = body["allow_cached"]
+    task = dict_to_task(body["task"])
+    if allow_cached:
+        cached_result = cache.get(str(task))
+        if cached_result is not None:
+            return jsonify(cached_result), 200
     try:
         changes = solver_solve(task, str(user.id))
     except UnsafeTaskError as error:
@@ -52,4 +59,5 @@ def solve(user: User) -> Tuple[Response, int]:
             return jsonify({'error': str(error)}), error_codes[type(error)]
         exception("Unexpected error")
         return jsonify({'error': "Unexpected error"}), 500
+    cache.set(str(task), changes)
     return jsonify(changes), 200

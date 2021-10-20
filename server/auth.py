@@ -47,7 +47,7 @@ def register():
             new_user = User(
                 email=email,
                 password=generate_password_hash(password, method='sha256'),
-                api_key=str(token_urlsafe(16)))
+                api_key=generate_api_key())
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
@@ -57,6 +57,13 @@ def register():
             return redirect(url_for('register'))
     else:
         return render_template('register.html')
+
+
+def generate_api_key():
+    api_key = str(token_urlsafe(16))
+    while api_key.startswith("-"):
+        api_key = str(token_urlsafe(16))
+    return api_key
 
 
 @app.route('/login', methods=['GET', 'POST'])

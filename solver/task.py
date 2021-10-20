@@ -18,8 +18,7 @@ class Task:
     places_to_look: List[Place]
 
 
-def json_to_task(json: str) -> Task:
-    task_dict = loads(json)
+def dict_to_task(task_dict: dict) -> Task:
     task_dict['places_to_change'] = [
         Place(**place_dict)
         for place_dict in task_dict['places_to_change']
@@ -30,3 +29,8 @@ def json_to_task(json: str) -> Task:
     ]
     task = Task(**task_dict)
     return task
+
+
+def json_to_task(json: str) -> Task:
+    task_dict = loads(json)
+    return dict_to_task(task_dict)
