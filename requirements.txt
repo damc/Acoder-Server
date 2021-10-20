@@ -1,6 +1,7 @@
 Flask~=2.0.1
 flask_login
 flask_sqlalchemy
+flask_caching
 gunicorn==20.1.0
 mysqlclient
 Werkzeug~=2.0.1
