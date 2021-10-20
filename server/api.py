@@ -59,5 +59,5 @@ def solve(user: User) -> Tuple[Response, int]:
             return jsonify({'error': str(error)}), error_codes[type(error)]
         exception("Unexpected error")
         return jsonify({'error': "Unexpected error"}), 500
-    cache.set(str(task), changes)
+    cache.set(str(task), changes, timeout=30)
     return jsonify(changes), 200
