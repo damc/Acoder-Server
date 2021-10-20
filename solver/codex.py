@@ -29,7 +29,7 @@ def codex(prompt_: str, **kwargs) -> str:
     try:
         response = Completion.create(**parameters)['choices'][0]
     except InvalidRequestError as error:
-        if str(error).startswith("to do: put message here"):
+        if str(error).startswith("This model\'s maximum"):
             raise InputTooLongError("Input too long")
         raise error
     debug(f"Prompt: {prompt_}")
