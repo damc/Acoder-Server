@@ -22,8 +22,7 @@ def codex(prompt_: str, **kwargs) -> str:
         "engine": "davinci-codex",
         "prompt": prompt_,
         "max_tokens": 2000,
-        "temperature": 0,
-        "logprobs": 2
+        "temperature": 0
     }
     parameters = {**default, **kwargs}
     try:
