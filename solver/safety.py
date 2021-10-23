@@ -88,7 +88,7 @@ def find_additions(old: str, new: str) -> List[str]:
     for line in unified_diff(old.splitlines(), new.splitlines()):
         if line.startswith("+"):
             if previous_line_is_addition:
-                additions[-1] += "\n" + line
+                additions[-1] += "\n" + line[1:]
             else:
                 additions.append(line[1:])
         previous_line_is_addition = line.startswith("+")
