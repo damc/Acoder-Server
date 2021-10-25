@@ -9,3 +9,5 @@ Jinja2~=3.0.1
 openai~=0.10.2
 pytest~=6.2.5
 setuptools~=45.2.0
+redis~=3.5.3
+PyYAML~=5.3.1
