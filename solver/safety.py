@@ -36,7 +36,10 @@ def sanitize_code(old: str, new: str) -> str:
     """
     additions = find_additions(old, new)
     for addition in additions:
-        if len(addition) > 100 and not is_code(addition):
+        long = len(addition) > 100
+        plain_text = not is_code(addition)
+        forbidden_expressions = contains_forbidden_expressions(addition)
+        if long and plain_text or forbidden_expressions:
             new = new.replace(addition, "{long_text}")
     return new
 
@@ -117,6 +120,14 @@ def is_code(content_: str) -> bool:
             matches += 2
     score = matches / len(content_)
     return score > CODE_THRESHOLD
+
+
+def contains_forbidden_expressions(content_: str) -> bool:
+    expressions = load_from_json('forbidden.json')
+    for expression in expressions:
+        if expression in content_ or expression.lower() in content_:
+            return True
+    return False
 
 
 def load_from_json(file_name: str):
