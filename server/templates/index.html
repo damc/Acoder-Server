@@ -4,28 +4,20 @@
 <p>Acoder is a console application for increasing programmer's productivity by generating code using artificial intelligence (powered by GPT-3 from OpenAI).</p>
 
 <h1>Installation</h1>
-<p>tl;dr - you can install Acoder from Snapstore.</p>
 
 <h2>Linux</h2>
-
-<h3>Ubuntu Software (1st way)</h3>
-<p>On Ubuntu 20, you can install Acoder by simply opening "Ubuntu Software" and searching for "Acoder".</p>
-
-<h3>Snap install (2nd way)</h3>
 <p>Run:</p>
-<code>sudo snap install acoder --classic</code>
-<p>If you don't have Snapstore installed already, then see this page for instructions: <a href="https://snapcraft.io/docs/installing-snap-store-app">installing snap store app</a>.</p>
+<code>
+    wget -O /usr/bin/acoder https://acoder.herokuapp.com/static/acoder/acoder_1.0.0
+</code>
+<p>Come back to this website a week after to see if there's a newer version (the current version is 1.0.0).</p>
 
 <h2>MacOS And Windows</h2>
-<p>Currently, the application is available only in Snapstore. As far as I know, Snapstore works only with Linux. However, it should be availible to install with Homebrew soon. Check this website after 2 weeks.</p>
+<p>Currently, the application is only available on Linux. Check this page on Sunday. If on Sunday, it's still not available for MacOS and Windows, then check this page week after.</p>
 
 <h1>Usage</h1>
 
-<p>Run in your terminal:</p>
-<code>acoder</code>
-<p>... and follow the instructions.</p>
-
-<p>Before you can use Acoder, you will need to sign up on this website. After you sign up, you can see an API key which you need to provide to the application (only when you use Acoder for the first time) using the following command:</p>
+<p>Before you can use Acoder, you will need to sign up on this website (the sign-up process is super quick). After you sign up, you can see an API key which you need to provide to the application (only when you use Acoder for the first time) using the following command:</p>
 <code>acoder configure [your API key here]</code>
 <p>After that run:</p>
 <code>acoder template</code>
@@ -33,9 +25,12 @@
 <p>After that run:</p>
 <code>acoder solve</code>
 <p>Acoder will display a proposition of changes to the code which you can then accept or reject (or try again).</p>
+<p>If you want you can simply run:</p>
+<code>acoder</code>
+<p>and then follow the instructions.</p>
 
 {% endblock %}
 
 <h1>Questions? Thoughts?</h1>
 
-<p>Contact me on damianczap@outlook.com</p>
+<p>Contact me on acoder2@outlook.com</p>
