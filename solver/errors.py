@@ -12,3 +12,7 @@ class OutputTooLongError(Exception):
 
 class ContentFilterError(Exception):
     pass
+
+
+class InvalidIdentifierError(Exception):
+    pass

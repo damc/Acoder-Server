@@ -36,7 +36,7 @@ def limit_number_of_requests(f):
     return decorator
 
 
-@app.route('/solve', methods=['POST'])
+@app.route('/v1/solve', methods=['POST'])
 @api_key_required
 @limit_number_of_requests
 def solve(user: User) -> Tuple[Response, int]:

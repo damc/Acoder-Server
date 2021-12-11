@@ -20,28 +20,31 @@ def validate_description(description: str):
         raise UnsafeTaskError("Task unsafe")
 
 
-def sanitize_code(old: str, new: str) -> str:
+def sanitize_code(old_code: str, new_code: str) -> str:
     """Replace new long text that has been added with "{long_text}"
 
     The function will replace new additions with "{long_text}" if:
-    1. The addition is longer than 100 characters,
+    1. The addition is longer than 100 characters and
     2. The addition is plain text, not code.
 
+    Or:
+    1. The addition contains forbidden expressions.
+
     Args:
-        old: old code
-        new: new code
+        old_code: old code
+        new_code: new code
 
     Returns:
         sanitized code
     """
-    additions = find_additions(old, new)
+    additions = find_additions(old_code, new_code)
     for addition in additions:
         long = len(addition) > 100
         plain_text = not is_code(addition)
         forbidden_expressions = contains_forbidden_expressions(addition)
         if long and plain_text or forbidden_expressions:
-            new = new.replace(addition, "{long_text}")
-    return new
+            new_code = new_code.replace(addition, "{long_text}")
+    return new_code
 
 
 def find_additions(old: str, new: str) -> List[str]:

@@ -1,0 +1,18 @@
+def check_board():
+    count = 0
+    for a in win_commbinations:
+        if board[a[0]] == board[a[1]] == board[a[2]] == "X":
+            print("Player 1 Wins!\n")
+            print("Congratulations!\n")
+            return True
+
+        if board[a[0]] == board[a[1]] == board[a[2]] == "O":
+            print("Player 2 Wins!\n")
+            print("Congratulations!\n")
+            return True
+    for a in range(9):
+        if board[a] == "X" or board[a] == "O":
+            count += 1
+        if count == 9:
+            print("The game ends in a Tie\n")
+            return True

@@ -6,7 +6,7 @@ from typing import List, Optional
 @dataclass(eq=False)
 class Place:
     file_path: str
-    functions: Optional[List[str]]
+    identifiers: Optional[List[str]]
     code: Optional[str]
 
 
@@ -34,3 +34,9 @@ def dict_to_task(task_dict: dict) -> Task:
 def json_to_task(json: str) -> Task:
     task_dict = loads(json)
     return dict_to_task(task_dict)
+
+
+@dataclass(eq=False)
+class Change:
+    place: Place
+    new_code: str

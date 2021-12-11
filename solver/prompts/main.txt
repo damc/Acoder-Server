@@ -2,7 +2,7 @@
 
 ## Code before change
 {% for place in (task.places_to_change + task.places_to_look) %}
-{% if place.code %}### {{ place.file_path }}
+{% if place.code %}### {{ place.file_path }}{% if place.identifiers %} -> {{ place.identifiers[0] }}{% endif %}
 
 ```
 {{ replace_stop(place.code) }}
@@ -13,11 +13,11 @@
 {{ task.description }}
 
 ## Code after change
-{% for place in changes %}
-### {{ place.file_path }}
+{% for change in changes %}
+### {{ change.place.file_path }}{% if change.place.identifiers %} -> {{ change.place.identifiers[0] }}{% endif %}
 
 ```
-{{ replace_stop(place.code) }}
+{{ replace_stop(change.new_code) }}
 ```
 {% endfor %}
 ### {{ current_place.file_path }}
