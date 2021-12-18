@@ -5,7 +5,7 @@ from .codex import codex, prompt
 from .preparation import prepare
 from .safety import sanitize_code
 from .task import Task, Place, Change
-from .truncating import truncate_code
+from .extracting import extract_code
 
 
 def solve(task: Task, user_id: Optional[str] = None) -> List[Place]:
@@ -32,7 +32,11 @@ def divide_places_in_list(places: List[Place]) -> List[Place]:
             new_places.append(deepcopy(place))
             continue
         for identifier in place.identifiers:
-            truncated_code = truncate_code(place.code, identifier)
+            truncated_code = extract_code(
+                place.file_path,
+                place.code,
+                identifier
+            )
             new_place = Place(place.file_path, [identifier], truncated_code)
             new_places.append(new_place)
     return new_places

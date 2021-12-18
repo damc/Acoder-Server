@@ -1,0 +1,13 @@
+    def calc_winner(self):
+        """Calculates a winner"""
+        lines = (
+            self.board, # rows
+            zip(*self.board), # columns
+            [(self.board[i][i], self.board[i][2 - i]) for i in range(3)] # diagonals
+        )
+
+        for line in chain(*lines):
+            if len(set(line)) == 1 and line[0] != " ":
+                return line[0]
+
+        return "D" if " " not in "".join(chain(*self.board)) else "P"

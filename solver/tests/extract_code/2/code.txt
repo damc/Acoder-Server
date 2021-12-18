@@ -1,0 +1,47 @@
+"""Tic tac toe game"""
+
+class TicTacToe:
+    """Tic tac toe game"""
+    def __init__(self):
+        self.board = [[" "] * 3 for _ in range(3)]
+        self.player = "X"
+
+    def __str__(self):
+        rows = ["|".join(row) for row in self.board]
+        return "\n-----\n".join(rows)
+
+    def __repr__(self):
+        return str(self)
+
+    def move(self, x, y):
+        """Makes a move"""
+        if self.board[y][x] == " ":
+            self.board[y][x] = self.player
+            if self.player == "X":
+                self.player = "O"
+            else:
+                self.player = "X"
+
+    def calc_winner(self):
+        """Calculates a winner"""
+        lines = (
+            self.board, # rows
+            zip(*self.board), # columns
+            [(self.board[i][i], self.board[i][2 - i]) for i in range(3)] # diagonals
+        )
+
+        for line in chain(*lines):
+            if len(set(line)) == 1 and line[0] != " ":
+                return line[0]
+
+        return "D" if " " not in "".join(chain(*self.board)) else "P"
+
+
+if __name__ == "__main__":
+    game = TicTacToe()
+    while game.calc_winner() == "P":
+        print(game)
+        x, y = map(int, input("Enter the coordinates: ").split())
+        game.move(x, y)
+    print(game)
+    print(game.calc_winner())
