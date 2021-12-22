@@ -1,0 +1,9 @@
+def counting_sort(array):
+    max_value = max(array)
+    count = [0] * (max_value + 1)
+    for i in array:
+        count[i] += 1
+    result = []
+    for i in range(max_value + 1):
+        result += [i] * count[i]
+    return result

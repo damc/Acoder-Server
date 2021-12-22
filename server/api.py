@@ -26,7 +26,7 @@ def api_key_required(f):
     return decorator
 
 
-def limit_number_of_requests(f):
+def rate_limiting(f):
     def decorator(user, *args, **kwargs):
         if user.requests >= 250:
             return jsonify({'error': 'Too many requests'}), 429
@@ -36,9 +36,9 @@ def limit_number_of_requests(f):
     return decorator
 
 
-@app.route('/solve', methods=['POST'])
+@app.route('/v1/solve', methods=['POST'])
 @api_key_required
-@limit_number_of_requests
+@rate_limiting
 def solve(user: User) -> Tuple[Response, int]:
     """Solve task"""
     body = loads(request.json)
@@ -61,3 +61,8 @@ def solve(user: User) -> Tuple[Response, int]:
         return jsonify({'error': "Unexpected error"}), 500
     cache.set(str(task), changes, timeout=20)
     return jsonify(changes), 200
+
+
+@app.route('/<_version>/message', methods=['GET'])
+def message(_version: str) -> Response:
+    return jsonify(None)

@@ -6,7 +6,6 @@ from logging import debug
 
 from .errors import InputTooLongError, OutputTooLongError, ContentFilterError
 
-
 PATH_TO_PROMPTS = "solver/prompts"
 
 
