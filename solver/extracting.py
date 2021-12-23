@@ -67,8 +67,10 @@ def extract_code_python(code: str, identifier: str) -> str:
     indentation = search(r'^([ \t]*)', lines[declaration_line + 1]).group(0)
     current_line = declaration_line + 2
     while (
+        current_line < len(lines) and (
             lines[current_line].startswith(indentation) or
             whitespaces_only(lines[current_line])
+        )
     ):
         current_line += 1
     return '\n'.join(lines[declaration_line:current_line]).rstrip()

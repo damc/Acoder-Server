@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from json import loads
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -12,14 +12,13 @@ class Place:
 
 @dataclass
 class Task:
-    title: str
     description: str
     places_to_change: List[Place]
     places_to_look: List[Place]
     test_commands: List[str]
 
 
-def dict_to_task(task_dict: dict) -> Task:
+def dict_to_task(task_dict: Dict) -> Task:
     task_dict['places_to_change'] = [
         Place(**place_dict)
         for place_dict in task_dict['places_to_change']
@@ -28,8 +27,6 @@ def dict_to_task(task_dict: dict) -> Task:
         Place(**place_dict)
         for place_dict in task_dict['places_to_look']
     ]
-    if 'test_commands' not in task_dict:  # handle the old version
-        task_dict['test_commands'] = []
     task = Task(**task_dict)
     return task
 

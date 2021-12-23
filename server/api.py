@@ -1,6 +1,6 @@
 from json import loads
 from logging import exception
-from typing import Tuple
+from typing import Dict, Tuple
 
 from flask import request, jsonify
 from flask.wrappers import Response
@@ -43,7 +43,7 @@ def solve(user: User) -> Tuple[Response, int]:
     """Solve task"""
     body = loads(request.json)
     allow_cached = body["allow_cached"]
-    task = dict_to_task(body["task"])
+    task = dict_to_task(handle_old_versions(body["task"]))
     if allow_cached:
         cached_result = cache.get(str(task))
         if cached_result is not None:
@@ -61,6 +61,14 @@ def solve(user: User) -> Tuple[Response, int]:
         return jsonify({'error': "Unexpected error"}), 500
     cache.set(str(task), changes, timeout=20)
     return jsonify(changes), 200
+
+
+def handle_old_versions(task_dict: Dict) -> Dict:
+    if 'test_commands' not in task_dict:
+        task_dict['test_commands'] = []
+    if 'title' in task_dict:
+        task_dict.pop('title')
+    return task_dict
 
 
 @app.route('/<_version>/message', methods=['GET'])
