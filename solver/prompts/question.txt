@@ -1,0 +1,122 @@
+"""Questions about programming"""
+
+"""
+Question:
+Is it possible to have two Python packages in one project? How would the directory structure look like in such case?
+
+Answer:
+Yes, it is possible to have two Python packages in one project.
+
+The directory structure would look like this:
+
+my_project/
+    __init__.py
+    my_package/
+        __init__.py
+        my_module.py
+    my_package2/
+        __init__.py
+        my_module.py
+
+The __init__.py files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name, such as string, from unintentionally hiding valid modules that occur later on the module search path. In the simplest case, __init__.py can just be an empty file, but it can also execute initialization code for the package or set the __all__ variable, described later.
+"""
+
+"""
+Question:
+I have a Flask application. I use SQLAlchemy for database. I have a simple table "User". I've just added a column 'requests' to that table. When I run the application, I recieve a SQL error that the column "requests" doesn't exist. How can I migrate my database to add that new "requests" column? Does SQLALchemy use database migrations (like for example Doctrine from PHP)? How does it work in SQLAlchemy?
+
+Answer:
+You can use Alembic to create a migration.
+
+Alembic is a database migration tool for SQLAlchemy.
+"""
+
+"""
+Question:
+What tool does a Flask application typically use for database management?
+
+Answer:
+The tool that a Flask application typically use for database management is SQLAlchemy.
+"""
+
+
+"""
+Question:
+I have a MySQL database. I want to give a user the permission to read a table (e.g. execute SELECT query), but I don't want them to have the permission to write to the table (e.g. execute INSERT query). Is it possible? If so, what query do I need to run to accomplish that?
+
+Answer:
+You can use the REVOKE command to revoke permissions from a user.
+
+You can use the GRANT command to give permissions to a user.
+
+Example:
+
+SQL Query:
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user'@'localhost';
+
+SQL Query:
+GRANT SELECT ON `table` TO 'user'@'localhost';
+"""
+
+"""
+Question:
+I use Jinja for templating. I have a list with the name 'identifiers'. I want to print '->' and the first element of that list after that. But if the list is empty, then I don't want to print anything. How can I express that in Jinja template?
+
+Answer:
+You can use the following Jinja template:
+
+{% if identifiers %}
+    -> {{ identifiers[0] }}
+{% endif %}
+"""
+
+"""
+Question:
+How to rebuild a docker container using docker-compose without cache?
+
+Answer:
+You can use the --no-cache option.
+
+Example:
+docker-compose build --no-cache
+"""
+
+"""
+Question:
+I would like to run `docker-compose build --no-cache` and direct the output to an output.txt file. How can I do that?
+
+Answer:
+You can use the following command:
+
+docker-compose build --no-cache > output.txt
+"""
+
+"""
+Question:
+What does 'sed' command do on Ubuntu?
+
+Answer:
+The sed command is used for pattern matching and replacement.
+
+It is used to search and replace text in files.
+
+Example:
+sed -i 's/old-text/new-text/g' file.txt
+"""
+
+"""
+Question:
+How to find the position of a substring in a string in Python?
+
+Answer:
+You can use the find method.
+
+Example:
+string.find('substring')
+"""
+
+"""
+Question:
+{{ question }}
+
+Answer:

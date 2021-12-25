@@ -1,3 +1,4 @@
+from functools import wraps
 from json import loads
 from logging import exception
 from typing import Dict, Tuple
@@ -5,7 +6,9 @@ from typing import Dict, Tuple
 from flask import request, jsonify
 from flask.wrappers import Response
 
-from solver import solve as solver_solve, UnsafeTaskError
+from solver.question import answer as solver_answer
+from solver.safety import UnsafeTaskError
+from solver.solve import solve as solver_solve
 from solver.task import dict_to_task
 from . import app
 from . import cache
@@ -15,6 +18,7 @@ from .user import User
 
 
 def api_key_required(f):
+    @wraps(f)
     def decorator(*args, **kwargs):
         api_key = request.headers.get('X-API-KEY')
         if api_key is None:
@@ -27,6 +31,7 @@ def api_key_required(f):
 
 
 def rate_limiting(f):
+    @wraps(f)
     def decorator(user, *args, **kwargs):
         if user.requests >= 250:
             return jsonify({'error': 'Too many requests'}), 429
@@ -69,6 +74,18 @@ def handle_old_versions(task_dict: Dict) -> Dict:
     if 'title' in task_dict:
         task_dict.pop('title')
     return task_dict
+
+
+@app.route('/v1/answer', methods=['GET'])
+@api_key_required
+@rate_limiting
+def answer(user: User) -> Tuple[Response, int]:
+    """Answer question"""
+    question = request.args.get('question')
+    if question is None:
+        return jsonify({'error': 'Question missing'}), 400
+    answer_ = solver_answer(question, str(user.id))
+    return jsonify({'answer': answer_}), 200
 
 
 @app.route('/<_version>/message', methods=['GET'])
