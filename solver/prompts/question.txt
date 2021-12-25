@@ -2,6 +2,62 @@
 
 """
 Question:
+I have a Flask application. I have everything in one main.py file, but the application became quite complex and I need to split it into many files. What is the best directory structure for a big Flask web application? Please give an example of how that directory structure should look like.
+
+Answer:
+The best directory structure for a Flask web application is to have a directory for the application itself, and then a directory for the templates, static files, and other supporting files.
+
+For example, you could have a directory structure like this:
+
+my_app/
+    app.py
+    templates/
+        index.html
+        about.html
+    static/
+        css/
+            style.css
+        js/
+            app.js
+    other_files/
+        readme.txt
+        LICENSE.txt
+
+The app.py file is the main entry point for the application. The templates directory contains all the HTML files. The static directory contains all the CSS and JavaScript files. The other_files directory contains any other files that are needed by the application.
+
+The templates directory is a subdirectory of the application directory. The static directory is a subdirectory of the application directory. The other_files directory is a subdirectory of the application directory.
+
+The app.py file imports the other files in the application directory, and then creates a Flask application.
+
+The templates directory contains the HTML files that are used by the application.
+
+The static directory contains the CSS and JavaScript files that are used by the application.
+
+The other_files directory contains any other files that are needed by the application.
+"""
+
+"""
+Question:
+I have an API and I would like user to be able to access that API with an API KEY. What is a safe way to generate the API KEY?
+
+Answer:
+The best way to generate an API KEY is to use a UUID.
+
+The uuid module in the Python standard library provides a UUID class that can be used to generate a UUID.
+
+Here is an example of how to generate a UUID:
+
+import uuid
+
+
+def generate_api_key():
+    return str(uuid.uuid4())
+
+print(generate_api_key())
+"""
+
+"""
+Question:
 Is it possible to have two Python packages in one project? How would the directory structure look like in such case?
 
 Answer:
@@ -19,6 +75,20 @@ my_project/
         my_module.py
 
 The __init__.py files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name, such as string, from unintentionally hiding valid modules that occur later on the module search path. In the simplest case, __init__.py can just be an empty file, but it can also execute initialization code for the package or set the __all__ variable, described later.
+"""
+
+"""
+Question:
+I want to make a website. I want to have the backend side as an API so that other application can use that API too. For frontend, I will probably use some JavaScript framework that will be consuming that API and displaying the stuff to the user. The backend side will be in Python. What framework/package/library would you recommend to use to create the backend API in Python? Also, what framework (and possibly language) would you recommend for the frontend?
+
+Answer:
+I would recommend Flask for the backend API.
+
+For the frontend, I would recommend AngularJS.
+
+You can use Flask and AngularJS together to create a web application.
+
+You can also use Flask and React together to create a web application.
 """
 
 """
@@ -48,8 +118,6 @@ Answer:
 You can use the REVOKE command to revoke permissions from a user.
 
 You can use the GRANT command to give permissions to a user.
-
-Example:
 
 SQL Query:
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user'@'localhost';
