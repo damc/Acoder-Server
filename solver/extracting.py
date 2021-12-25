@@ -1,5 +1,6 @@
 from pathlib import Path
 from re import search
+from typing import List
 
 from .codex import codex, prompt
 from .errors import InvalidIdentifierError
@@ -65,15 +66,9 @@ def extract_code_python(code: str, identifier: str) -> str:
     lines = code.split("\n")
     declaration_line = find_declaration_line(code, identifier, LANGUAGE_PYTHON)
     indentation = search(r'^([ \t]*)', lines[declaration_line + 1]).group(0)
-    current_line = declaration_line + 2
-    while (
-        current_line < len(lines) and (
-            lines[current_line].startswith(indentation) or
-            whitespaces_only(lines[current_line])
-        )
-    ):
-        current_line += 1
-    return '\n'.join(lines[declaration_line:current_line]).rstrip()
+    start = function_start_python(declaration_line, indentation, lines)
+    end = function_end_python(declaration_line, indentation, lines)
+    return '\n'.join(lines[start:end]).rstrip()
 
 
 def find_declaration_line(code: str, function: str, language: int) -> int:
@@ -84,6 +79,37 @@ def find_declaration_line(code: str, function: str, language: int) -> int:
         if search(regex, line):
             return key
     raise InvalidIdentifierError("Invalid identifier")
+
+
+def function_start_python(
+        declaration_line: int,
+        indentation: str,
+        lines: List[str]
+) -> int:
+    current_line = declaration_line - 1
+    while (
+            current_line > 0 and
+            lines[current_line].startswith(indentation) and
+            not whitespaces_only(lines[current_line])
+    ):
+        current_line -= 1
+    return current_line + 1
+
+
+def function_end_python(
+        declaration_line: int,
+        indentation: str,
+        lines: List[str]
+) -> int:
+    current_line = declaration_line + 2
+    while (
+        current_line < len(lines) and (
+            lines[current_line].startswith(indentation) or
+            whitespaces_only(lines[current_line])
+        )
+    ):
+        current_line += 1
+    return current_line
 
 
 def whitespaces_only(text: str) -> bool:
