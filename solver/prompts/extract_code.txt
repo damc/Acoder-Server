@@ -1,6 +1,6 @@
 # Extraction
 
-Given code in a file, extract the code related to the given identifier. For example if the identifier is a method name, then write the declaration and the definition of that method. If the identifier doesn't exist in the given code, then write "Not found".
+Given code in a file, extract the code related to the given identifier. For example if the identifier is a method name, then write the declaration and the definition of that method. If the identifier doesn't exist in the given code, then just make an empty snippet.
 
 ### Extract
 
@@ -198,7 +198,8 @@ def index():
 
 Identifier: register
 
-Not found
+```
+```
 
 ### Extract
 
