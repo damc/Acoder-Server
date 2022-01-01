@@ -4,3 +4,4 @@ task.md
 *__pycache__*
 *egg-info*
 logs.log
+.pytest_cache
