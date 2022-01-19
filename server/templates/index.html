@@ -3,14 +3,16 @@
 {% block body %}
 <p>Acoder is a console application for increasing programmer's productivity by generating code using artificial intelligence (powered by GPT-3 from OpenAI).</p>
 <p>Start by watching the demonstration:</p>
-<iframe width="800" height="450" src="https://www.youtube.com/embed/g4sn5NW9kKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="800" height="450" src="https://www.youtube.com/embed/g4sn5NW9kKA" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
 
 <h1>Advantages</h1>
 
 <ul>
-    <li>It can generate up to ~8000 characters of code in one run.</li>
-    <li>When generating code, it can take code in other files into account.</li>
     <li>You can describe what changes you want it to make in a natural language (English).</li>
+    <li>When generating code, it can take code in other files into account.</li>
+    <li>It can generate up to ~8000 characters of code in one run.</li>
 </ul>
 
 <h1>Installation</h1>
@@ -18,14 +20,17 @@
 <h2>Windows</h2>
 
 <ol>
-    <li>Download Acoder installer: <a href="https://acoder.herokuapp.com/static/acoder/windows/acoder_installer.exe">Acoder v1.1.0 for Windows</a>.</li>
+    <li>Download Acoder installer: <a href="https://acoder.herokuapp.com/static/acoder/windows/acoder_installer.exe">Acoder
+        v1.1.0 for Windows</a>.
+    </li>
     <li>Run the installer and follow the instructions.</li>
     <li>Run "acoder" from the command line interface to start using Acoder.</li>
 </ol>
 
 <h2>Linux</h2>
 
-<p>On Linux, you can install the application from Snapstore. On Ubuntu 20, you can simply open Ubuntu Software and search for "Acoder".</p>
+<p>On Linux, you can install the application from Snapstore. On Ubuntu 20, you can simply open Ubuntu Software and
+    search for "Acoder".</p>
 
 <p>On other Linux distributions with snap installed, you can do:</p>
 
@@ -34,7 +39,8 @@
 <p>Alternatively, you can download the binary:</p>
 
 <ol>
-    <li>Download Acoder: <a href="https://acoder.herokuapp.com/static/acoder/linux/acoder">Acoder v1.1.0 for linux</a>.</li>
+    <li>Download Acoder: <a href="https://acoder.herokuapp.com/static/acoder/linux/acoder">Acoder v1.1.0 for linux</a>.
+    </li>
     <li>Move it to "/usr/bin" directory.</li>
     <li>Set permissions (use "chmod" command) to execute Acoder.</li>
     <li>Run "acoder" from the terminal to start using Acoder.</li>
@@ -43,32 +49,99 @@
 <h2>MacOS</h2>
 
 <ol>
-    <li>Download Acoder: <a href="https://acoder.herokuapp.com/static/acoder/mac_os/acoder">Acoder v1.1.0 for Mac OS</a>.</li>
+    <li>Download Acoder: <a href="https://acoder.herokuapp.com/static/acoder/mac_os/acoder">Acoder v1.1.0 for Mac OS</a>.
+    </li>
     <li>Move it to "/usr/local/bin" directory.</li>
     <li>Run "acoder" from the terminal to start using Acoder.</li>
 </ol>
 
 <h1>Usage</h1>
 
-<p>This YouTube playlist demonstrates the Acoder features: <a href="https://www.youtube.com/playlist?list=PLuIB42JX5rHDKigkWbzwAiacRf5mFBeAa">Learn about Acoder</a>.</p>
+<p>This YouTube playlist demonstrates the Acoder features: <a
+        href="https://www.youtube.com/playlist?list=PLuIB42JX5rHDKigkWbzwAiacRf5mFBeAa">Learn about Acoder</a>.</p>
 
-<p>Before you can use Acoder, you will need to <a href="{{ url_for('register') }}">sign up</a> on this website (the sign-up process is super quick). After you sign up, you can see an API key which you need to provide to the application (only when you use Acoder for the first time) using the following command:</p>
+<p>Before you can use Acoder, you will need to <a href="{{ url_for('register') }}">sign up</a> on this website (the
+    sign-up process is super quick). After you sign up, you can see an API key which you need to provide to the
+    application (only when you use Acoder for the first time) using the following command:</p>
 <code>acoder configure [your API key here]</code>
 <p>After that run:</p>
 <code>acoder template</code>
-<p>This will generate template file "task.md". Open that file and fill the file according to the instructions inside the file.</p>
+<p>This will generate template file "task.md". Open that file and fill the file according to the instructions inside the
+    file.</p>
 <p>After that run:</p>
 <code>acoder solve</code>
 <p>Acoder will display a proposition of changes to the code which you can then accept or reject (or try again).</p>
 <p>If you want you can simply run:</p>
 <code>acoder</code>
 <p>and then follow the instructions.</p>
-<p>I don't recommend to use Acoder for making every single change in the code. If you use Acoder, then you will get a feeling when Acoder is useful and when it's better to make a change manually.</p>
+<p>I don't recommend to use Acoder for making every single change in the code. If you use Acoder, then you will get a
+    feeling when Acoder is useful and when it's better to make a change manually.</p>
+
+<h1>Get notified about significant improvement</h1>
+
+<p>Acoder can be useful already, but we're improving it. If you'd like to get notified when the next significant
+    improvement happens, then leave your email below:</p>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+
+</style>
+<div id="mc_embed_signup">
+    <form action="https://herokuapp.us20.list-manage.com/subscribe/post?u=595a6a6380818dc20eac446ff&amp;id=b3412bfad1"
+          method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+          target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+
+            <div class="mc-field-group">
+                <label for="mce-EMAIL">Email Address </label>
+                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+            </div>
+            <div class="mc-field-group input-group">
+                <strong>What emails would you like to receive? </strong>
+                <ul>
+                    <li><input type="checkbox" value="1" name="group[177288][1]" id="mce-group[177288]-177288-0"
+                               checked><label
+                            for="mce-group[177288]-177288-0">Emails about significant improvements to Acoder.</label></li>
+                    <li><input type="checkbox" value="2" name="group[177288][2]" id="mce-group[177288]-177288-1"><label
+                            for="mce-group[177288]-177288-1">Emails about contributing to Acoder.</label></li>
+                    <li><input type="checkbox" value="4" name="group[177288][4]" id="mce-group[177288]-177288-2"><label
+                            for="mce-group[177288]-177288-2">Emails about investing in Acoder.</label></li>
+                </ul>
+            </div>
+            <div id="mce-responses" class="clear foot">
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                                                                                      name="b_595a6a6380818dc20eac446ff_b3412bfad1"
+                                                                                      tabindex="-1" value=""></div>
+            <div class="optionalParent">
+                <div class="clear foot">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <p class="brandingLogo"><a href="http://eepurl.com/hSiZSz"
+                                               title="Mailchimp - email marketing made easy and fun"><img
+                            src="https://eep.io/mc-cdn-images/template_images/branding_logo_text_dark_dtp.svg"></a></p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+<script type='text/javascript'>
+    (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);
+</script>
+<!--End mc_embed_signup-->
 
 <h1>Questions? Thoughts?</h1>
 
 <p>Contact me on acoder2@outlook.com</p>
 
-<p>If you'd like to invest in the project or contribute to it (and be financially rewarded for that), then contact me on that email and I'll send you an email back when I am ready to receive an investment or contribution.</p>
+<p>If you'd like to invest in the project or contribute to it (and be financially rewarded for that), then contact me on
+    that email and I'll send you an email back when I am ready to receive an investment or contribution.</p>
 
 {% endblock %}
