@@ -103,6 +103,15 @@ def logout():
 def dashboard():
     """Dashboard page."""
     if current_user.is_authenticated:
-        return render_template('dashboard.html', api_key=current_user.api_key)
+        return render_template(
+            'dashboard.html',
+            api_key=current_user.api_key
+        )
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/collaboration')
+def collaboration():
+    """Collaboration page."""
+    return render_template('collaboration.html')

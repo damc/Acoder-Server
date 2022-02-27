@@ -6,6 +6,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
+from flaskext.markdown import Markdown
 
 basicConfig(stream=stdout, level=DEBUG)
 
@@ -23,6 +24,8 @@ cache = Cache(app, config={
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+Markdown(app)
 
 from .user import User
 from .auth import *
