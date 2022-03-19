@@ -1,4 +1,4 @@
-from logging import basicConfig, DEBUG
+from logging import basicConfig, DEBUG, debug
 from os import getenv
 from sys import stdout
 
@@ -12,6 +12,7 @@ basicConfig(stream=stdout, level=DEBUG)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['CODEX_PLUS_PLUS_BASE_URL'] = getenv('CODEX_PLUS_PLUS_BASE_URL')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

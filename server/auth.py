@@ -1,3 +1,5 @@
+from logging import debug
+
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user
 from secrets import token_urlsafe
@@ -115,3 +117,18 @@ def dashboard():
 def collaboration():
     """Collaboration page."""
     return render_template('collaboration.html')
+
+
+@app.route('/progress')
+def progress():
+    """Progress page."""
+    return render_template(
+        'progress.html',
+        codex_plus_plus_base_url=app.config['CODEX_PLUS_PLUS_BASE_URL']
+    )
+
+
+@app.route('/ycombinator')
+def ycombinator():
+    """YCombinator page."""
+    return render_template('ycombinator.html')
