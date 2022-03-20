@@ -5,7 +5,9 @@
 {% endblock %}
 {% block body %}
 {% filter markdown %}
-This page demonstrates the progress on Codex++ project (in the future, it might have a different name).
+This page describes the progress on Codex++ project (in the future, it might have a different name).
+
+If you return here later, then you might be able to try Codex++ here on this page (we can't share it now because the Codex++ application hasn't been approved by OpenAI to go live yet).
 
 This is what Codex++ aims to be (this is where we want to be ideally, in the future):
 
@@ -23,69 +25,71 @@ This is where we are now:
 3. The generated application can consist of multiple files.
 4. The application tests the generated code with automated tests in the process of generation so that the generated code is reliable. But it doesn't test certain parts that are difficult to test yet.
 5. The application is just bad for now (especially when you try to generate an application that requires to use object-oriented programming), there are lots of things to work on yet.
-6. The application is slow (when you try it below, it might be fast because the result is cached). Part of the reason for that is that OpenAI API has a maximum limit of how many requests you can send in a minute. We can later request OpenAI to increase that limit. For now, it's not a big deal - when we get rate limit error from OpenAI API, then we simply wait a moment and send the request again later.
+6. The application is slow. Part of the reason for that is that OpenAI API has a maximum limit of how many requests you can send in a minute. We can later request OpenAI to increase that limit. For now, it's not a big deal - when we get rate limit error from OpenAI API, then we simply wait a moment and send the request again later.
 
-You can try Codex++ at its current stage below. Put the description of an application that you want to generate below and click "Submit". After the application is generated, you will get the source code of that application.
 {% endfilter %}
-<p>
-    <textarea
-            id="description"
-            rows="20"
-            style="width: 100%"
-            placeholder="Enter your description here">An application that accepts a name of an algorithm and input for that algorithm. The application outputs the output of the algorithm.
+<!--<p>-->
+<!--    <textarea-->
+<!--            id="description"-->
+<!--            rows="20"-->
+<!--            style="width: 100%"-->
+<!--            placeholder="Enter your description here">An application that accepts a name of an algorithm and input for that algorithm. The application outputs the output of the algorithm.-->
 
-This is how the app works:
-1. User types "algorithm <algorithm_name>" in the command line interface.
-2. Application asks for the input of the algorithm. The input might be different depending on the task / algorithm name.
-3. User types in the input.
-4. Application executes the algorithm.
-5. Application prints the output of the algorithm.
+<!--This is how the app works:-->
+<!--1. User types "algorithm <algorithm_name>" in the command line interface.-->
+<!--2. Application asks for the input of the algorithm. The input might be different depending on the task / algorithm name.-->
+<!--3. User types in the input.-->
+<!--4. Application executes the algorithm.-->
+<!--5. Application prints the output of the algorithm.-->
 
-`algorithm_name` can be:
-1. merge_sort - sorts a list of numbers,
-2. binary_search - finds a position of a number in a list of numbers,
-3. lowest_number - finds the lowest number in a list of numbers.</textarea>
-</p>
-<p>
-    <button id="submit" class="btn btn-primary">Submit</button>
-</p>
-<code id="result"></code>
-<script>
-    $('#submit').click(function() {
-        postCodebase($('#description').val());
-    });
+<!--`algorithm_name` can be:-->
+<!--1. merge_sort - sorts a list of numbers,-->
+<!--2. binary_search - finds a position of a number in a list of numbers,-->
+<!--3. lowest_number - finds the lowest number in a list of numbers.</textarea>-->
+<!--</p>-->
+<!--<p>-->
+<!--    <button id="submit" class="btn btn-primary">Submit</button>-->
+<!--</p>-->
+<!--<code id="result"></code>-->
+<!--<script>-->
+<!--    $('#submit').click(function() {-->
+<!--        postCodebase($('#description').val());-->
+<!--    });-->
 
-    function postCodebase(description) {
-        $.ajax({
-            url: '{{ codex_plus_plus_base_url }}/codebase',
-            type: 'post',
-            dataType: 'json',
-            contentType: 'application/json',
-            crossDomain: true,
-            success: function(data) {
-                getCodebase(data.id);
-            },
-            data: JSON.stringify({ description: description })
-        });
-        $('#result').html(
-            "Your application is being generated... Please wait."
-        );
-    }
+<!--    function postCodebase(description) {-->
+<!--        $.ajax({-->
+<!--            url: '{{ codex_plus_plus_base_url }}/codebase',-->
+<!--            type: 'post',-->
+<!--            dataType: 'json',-->
+<!--            contentType: 'application/json',-->
+<!--            crossDomain: true,-->
+<!--            success: function(data) {-->
+<!--                getCodebase(data.id);-->
+<!--            },-->
+<!--            data: JSON.stringify({ description: description })-->
+<!--        });-->
+<!--        $('#result').html(-->
+<!--            "Your application is being generated... Please wait." +-->
+<!--            "<br /> <br />" +-->
+<!--            "It might take several minutes and depends on the complexity" +-->
+<!--            " of the application."-->
+<!--        );-->
+<!--    }-->
 
-    function getCodebase(id) {
-        $.ajax({
-            url: '{{ codex_plus_plus_base_url }}/codebase/' + id,
-            type: 'get',
-            dataType: 'json',
-            crossDomain: true,
-            success: function(data) {
-                if (data.code !== null) {
-                    $('#result').html(data.code);
-                } else {
-                    setTimeout(getCodebase, 5000, id);
-                }
-            }
-        });
-    }
-</script>
+<!--    function getCodebase(id) {-->
+<!--        $.ajax({-->
+<!--            url: '{{ codex_plus_plus_base_url }}/codebase/' + id,-->
+<!--            type: 'get',-->
+<!--            dataType: 'json',-->
+<!--            crossDomain: true,-->
+<!--            success: function(data) {-->
+<!--                if (data.code !== null) {-->
+<!--                    $('#result').html(data.code);-->
+<!--                } else {-->
+<!--                    setTimeout(getCodebase, 5000, id);-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
 {% endblock %}
