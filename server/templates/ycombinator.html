@@ -1,17 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Progress{% endblock %}
+{% block title %}YCombinator{% endblock %}
 {% block javascripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}
 {% block body %}
-    <p>Hello YC people.</p>
-    <p>
-        This page exists so that you can learn about the progress since the time when I sent the application to YCombinator.
-    </p>
-    <p>
-        You can learn more about the current progress here: <a href="/progress">Progress</a>.
-    </p>
-    <p>
-        Additionally, I recently had a conversation with patent attorneys in order to receive an opinion about patentability of my method (the method which my application will be based on). The opinion of the patent attorneys was that my method is most likely patentable (within United States).
-    </p>
+{% filter markdown %}
+Hello YC people.
+
+This page exists so that you can learn about the progress since the time when I sent the application to YCombinator.
+
+You can learn more about the current progress here: [Progress](/progress).
+
+Additionally, I recently had a conversation with patent attorneys in order to receive an opinion about patentability of my method (the method which my application will be based on). The opinion of the patent attorneys was that my method is most likely patentable (within United States).
+
+Additionally, I have decided to change the strategy.
+
+The previous strategy was like this:
+
+1. Create the product - application that generates applications, based on the algorithm/method, built on top of Codex.
+2. Find users.
+3. Profit.
+
+The current strategy is like this:
+
+1. Find few users (I don't need to look for them now because I will be my first user).
+2. Create the application (that user has requested) by following the algorithm manually (instead of programmatically).
+3. Gradually automate the process of generating the application, starting from the subprocesses of which automation gives the highest benefit.
+4. Profit.
+5. Find more users than few.
+6. More profit.
+
+Thanks to the current strategy, I will be learning faster about the potential issues with the method and which parts of it are important and about user needs. I will also be able to have paying users sooner.
+
+{% endfilter %}
 {% endblock %}
