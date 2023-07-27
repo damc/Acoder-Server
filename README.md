@@ -14,4 +14,4 @@ In order to run the website locally, run
 
 # Code
 
-The most important part is the `solver` package - it contains the code that actually do the job. The Acoder website and API is contained by `server` package.
+The most important part is the `solver` package - it contains the code that actually do the job (generates code through contact with OpenAI API and doing some things on top of that). The Acoder website and API is contained by `server` package.
