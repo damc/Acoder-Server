@@ -28,12 +28,18 @@ FUNCTION_DECLARATION_REGEX = {
 def extract_code(file_path: str, code: str, identifier: str) -> str:
     """Extract the code that relates to the identifier.
 
-    Identifier is usually a function/method name.
+    Identifier might be:
+    1. Range (a string, e.g. '20-30') - in that case, it will extract
+        the given lines of code.
+    2. Function/method name - in that case, it will extract the
+        function/method code.
+    3. Other identifier - in that case, it will just tell Codex
+        to extract the part of code related to that identifier.
 
     Args:
         file_path(str): path to the file
         code(str): content of a file with code
-        identifier(str): identifier name (usually a method or function)
+        identifier(str): identifier name (range or identifier name)
 
     Returns:
         The part of the code with the declaration and the definition of
